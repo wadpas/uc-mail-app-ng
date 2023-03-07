@@ -1,45 +1,33 @@
-import { Component } from '@angular/core';
-
-import { User } from './auth-form/auth-form.interface';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  styleUrls: ['app.component.scss'],
   template: `
-    <div>
-      <auth-form 
-        (submitted)="createUser($event)">
-        <h3>Create account</h3>
-        <button type="submit">
-          Join us
-        </button>
-      </auth-form>
-      <auth-form 
-        (submitted)="loginUser($event)">
-        <h3>Login</h3>
-        <auth-remember (checked)="rememberUser($event)"></auth-remember>
-        <auth-remember (checked)="rememberUser($event)"></auth-remember>
-        <auth-remember (checked)="rememberUser($event)"></auth-remember>
-        <button type="submit">
-          Login
-        </button>
-      </auth-form>
+    <div class="app">
+      <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/107px-Gmail_icon_%282020%29.svg.png">
+      </header>
+      <div class="app__content">
+        <nav>
+          <a
+            routerLink="folder/inbox"
+            routerLinkActive="active">
+            Inbox
+          </a>
+          <a
+            routerLink="folder/trash"
+            routerLinkActive="active">
+            Trash
+          </a>
+        </nav>
+        <mail-app></mail-app>
+      </div>
     </div>
   `
 })
-export class AppComponent {
-
-  rememberMe: boolean = false;
-
-  rememberUser(remember: boolean) {
-    this.rememberMe = remember;
-  }
-
-  createUser(user: User) {
-    console.log('Create account', user);
-  }
-
-  loginUser(user: User) {
-    console.log('Login', user, this.rememberMe);
-  }
-
+export class AppComponent implements OnInit {
+  constructor(private router: Router) { }
+  ngOnInit() { }
 }

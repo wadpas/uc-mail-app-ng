@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
-import { AuthFormModule } from './auth-form/auth-form.module';
+import { MailModule } from './mail/mail.module';
 
 import { AppComponent } from './app.component';
+
+export const ROUTES: Routes = [
+  { path: '**', redirectTo: 'folder/inbox' }
+];
 
 @NgModule({
   declarations: [
@@ -11,10 +17,12 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AuthFormModule
+    HttpClientModule,
+    MailModule,
+    RouterModule.forRoot(ROUTES, { enableTracing: true })
   ],
   bootstrap: [
     AppComponent
   ]
 })
-export class AppModule {}
+export class AppModule { }
