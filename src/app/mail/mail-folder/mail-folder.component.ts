@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
-import { Mail } from '../../mail.interface';
+import { Mail } from '../mail.interface';
 
 
 @Component({
@@ -22,12 +22,10 @@ export class MailFolderComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.messages = data['messages']
-      console.log(data)
     })
 
     this.route.params.subscribe(data => {
       this.title = data['name']
-      console.log(data)
     })
   }
 }

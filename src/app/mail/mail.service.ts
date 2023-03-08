@@ -10,4 +10,8 @@ export class MailService {
         return this.http.get<Mail[]>(`http://localhost:3000/messages?folder=${folder}`)
     }
 
+    getMessage(id: number) {
+        return this.http.get<Mail>(`http://localhost:3000/messages?id=${id}`)
+    }
+
 }
