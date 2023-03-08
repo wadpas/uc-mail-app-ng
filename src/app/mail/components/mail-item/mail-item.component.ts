@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Mail } from '../../models/mail.interface';
+import { Mail } from '../../mail.interface';
 
 @Component({
   selector: 'mail-item',

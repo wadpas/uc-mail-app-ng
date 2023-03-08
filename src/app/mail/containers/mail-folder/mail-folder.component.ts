@@ -1,24 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
+import { Mail } from '../../mail.interface';
 
-import { Mail } from '../../models/mail.interface';
 
 @Component({
   selector: 'mail-folder',
   styleUrls: ['mail-folder.component.scss'],
   template: `
-    <h2>Inbox</h2>
+    <h2>{{ this.title}}</h2>
     <mail-item
       *ngFor="let message of messages"
       [message]="message">
-    </mail-item>
-  `
+    </mail-item>`
 })
-export class MailFolderComponent {
-  messages: Mail[] = [{
-    "id": 1,
-    "folder": "inbox",
-    "from": "Jane Smith",
-    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lobortis, neque at ultricies fringilla, ligula metus",
-    "timestamp": 1487848162905
-  }];
+export class MailFolderComponent implements OnInit {
+  constructor(private route: ActivatedRoute) { }
+
+  title: string
+  messages: Mail[]
+
+  ngOnInit(): void {
+    this.route.data.subscribe(data => {
+      this.messages = data['messages']
+      console.log(data)
+    })
+
+    this.route.params.subscribe(data => {
+      this.title = data['name']
+      console.log(data)
+    })
+  }
 }
